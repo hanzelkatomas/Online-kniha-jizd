@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Animate.style-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+
+    <title>Online kniha jízd | Kniha jízd</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light menu">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo2.png" width="60" height="80" alt="" loading="lazy"
+                    style="padding: 1rem 0rem 1rem; margin-right: 0.7rem;">
+                Online kniha jízd
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Kniha jízd</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add-records.html">Kalkulačka trasy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="how-to.html">Jak používat?</a>
+                    </li>                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="alert-book"
+        class="alert alert-warning alert-dismissible animate__animated animate__slideInDown slideInDown" role="alert"
+        style="display: none;">
+        <strong id="alert-book-text">Test</strong>
+        <button type="button" class="close" aria-hidden="true" onclick="hideAlertBook()">
+            &times;
+        </button>
+    </div>
+
+    <div class="fixed-top">
+        <div id="alert-book1"
+            class="alert alert-success alert-dismissible animate__animated animate__slideInDown slideInDown"
+            role="alert" style="display: none;">
+            <strong id="alert-book-text1">Test</strong>
+            <button type="button" class="close" aria-hidden="true" onclick="hideAlertBookGreen()">
+                &times;
+            </button>
+        </div>
+    </div>
+
+    <div id="make-book" class="container">
+        <h1 class="main-header">Vytvoření knihy jízd</h1>
+        <p>Vítejte v online knize jízd. </p>
+        <p>Kniha vám umožní přídávat do ní záznamy o jízdách a následně si vaši knihu jízd můžete vytisknout ve
+            vygenerovaném archu.<br>
+            Pro přídaní záznamů do knihy jízd je třeba prvně vytvořit samotnou knihu. Vyplňte prosím měsíc a rok pro,
+            kterou budete vaši knihu jízd vytvářet. Dále vyplňte údaje o vozidle:</p>
+        <br>
+        <form>
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    <label for="manufacturer">Výrobce vozu</label>
+                    <input id="manufacturer" type="text" class="form-control" placeholder="Např. Škoda">
+                </div>
+                <div class="col-4">
+                    <label for="model">Model vozu</label>
+                    <input id="model" type="text" class="form-control" placeholder="Např. Octavia">
+                </div>
+                <div class="col-2">
+                    <label for="consumption">Spotřeba vozu</label>
+                    <input id="consumption" type="number" class="form-control" placeholder="Litrů na 100 km" step="0.5">
+                </div>
+                <div class="col-2">
+                    <label for="spz">SPZ</label>
+                    <input id="spz" type="text" class="form-control" placeholder="Např. 6A81478">
+                </div>
+            </div>
+            <div class="row justify-content-between" style="margin-top: 2rem;">
+                <div class="col-4">
+                    <label for="company">Název firmy/společnosti</label>
+                    <input id="company" type="text" class="form-control" placeholder="Např. Agrofert a.s.">
+                </div>
+                <div class="col-3">
+                    <label for="tachometer">Počáteční stav tachometru</label>
+                    <input id="tachometer" type="number" class="form-control" placeholder="Např. 100 000 km"
+                        step="1000">
+                </div>
+                <div class="col-3">
+                    <label for="year">Rok</label>
+                    <input id="year" type="number" class="form-control" placeholder="Např. 2020" value="2020">
+                </div>
+                <div class="col-2">
+                    <label for="month">Měsíc</label>
+                    <select id="month" class="form-control">
+                        <option selected>Leden</option>
+                        <option>Únor</option>
+                        <option>Březen</option>
+                        <option>Duben</option>
+                        <option>Květen</option>
+                        <option>Červen</option>
+                        <option>Červenec</option>
+                        <option>Srpen</option>
+                        <option>Září</option>
+                        <option>Říjen</option>
+                        <option>Listopad</option>
+                        <option>Prosinec</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+
+        <button id="make-book-button" type="button" class="btn btn-secondary btn-block" onclick="makeBook()">Vytvořit
+            knihu
+            jízd</button>
+    </div>
+
+    <div id="book" class="container" style="display: none;">
+        <h1 class="main-header">Kniha jízd</h1>
+        <p>Na zdejší stránce můžete vidět přehled pro vaši knihu jízd.<br>
+            Nové záznamy lze přidávat <a href="add-records.html">zde</a> nebo můžete kliknout na položku horního menu s
+            názvem
+            "Kalkulačka trasy".
+        </p>
+
+        <hr>
+
+        <h2 class="main-header">Vaše kniha jízd:</h2>
+        <div id="book-info" class="container">
+            <div class="row">
+                <div class="col">
+                    <h3 id="manu-header" class="car-info-header">Výrobce vozu: </h3>
+                </div>
+                <div class="col">
+                    <h3 id="model-header" class="car-info-header">Model vozu: </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3 id="consumption-header" class="car-info-header">Průměrná norma spotřeby: </h3>
+                </div>
+                <div class="col">
+                    <h3 id="spz-header" class="car-info-header">SPZ: </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3 id="company-header" class="car-info-header">Firma: </h3>
+                </div>
+                <div class="col">
+                    <h3 id="tacho-header" class="car-info-header">Počáteční stav tachometru: </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3 id="year-header" class="car-info-header">Rok: </h3>
+                </div>
+                <div class="col">
+                    <h3 id="month-header" class="car-info-header">Měsíc: </h3>
+                </div>
+            </div>
+
+            <div class="container" style="margin-top: 2rem;">
+                <div class="row justify-content-around">
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-info book-button" onclick="showEditBook()">Upravit
+                            knihu jízd <i class="fa fa-edit"
+                                style="font-size:28px; margin-top: 0.5rem; margin-left: 0.5rem;"></i></button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-warning book-button"
+                            onclick="deleteRecords()">Smazat všechny
+                            záznamy <i class="fa fa-remove"
+                                style="font-size:28px; margin-top: 0.5rem; margin-left: 0.3rem;"></i></button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-outline-danger book-button" onclick="eraseBook()">Smazat
+                            knihu jízd <i class="fa fa-trash"
+                                style="font-size:28px; margin-top: 0.5rem; margin-left: 0.5rem;"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="book-edit" style="display: none;">
+            <div class="row">
+                <div class="col">
+                    <label for="manufacturer-edit">Výrobce vozu</label>
+                    <input id="manufacturer-edit" type="text" class="form-control" placeholder="Např. Škoda">
+                </div>
+                <div class="col">
+                    <label for="model-edit">Model vozu</label>
+                    <input id="model-edit" type="text" class="form-control" placeholder="Např. Octavia">
+                </div>
+                <div class="col">
+                    <label for="consumption-edit">Spotřeba vozu</label>
+                    <input id="consumption-edit" type="number" class="form-control" placeholder="V litrech na 100 km">
+                </div>
+                <div class="col">
+                    <label for="spz-edit">SPZ</label>
+                    <input id="spz-edit" type="text" class="form-control" placeholder="Např. 6A81478">
+                </div>
+            </div>
+            <div class="row" style="margin-top: 2rem;">
+                <div class="col">
+                    <label for="company-edit">Název firmy/společnosti</label>
+                    <input id="company-edit" type="text" class="form-control" placeholder="Např. Agrofert a.s.">
+                </div>
+                <div class="col-3">
+                    <label for="tachometer-edit">Počáteční stav tachometru</label>
+                    <input id="tachometer-edit" type="number" class="form-control" placeholder="Např. 100 000 km">
+                </div>
+                <div class="col-3">
+                    <label for="year-edit">Rok</label>
+                    <input id="year-edit" type="number" class="form-control" value="">
+                </div>
+                <div class="col-2">
+                    <label for="month-edit">Měsíc</label>
+                    <select id="month-edit" class="form-control">
+                        <option selected>Leden</option>
+                        <option>Únor</option>
+                        <option>Březen</option>
+                        <option>Duben</option>
+                        <option>Květen</option>
+                        <option>Červen</option>
+                        <option>Červenec</option>
+                        <option>Srpen</option>
+                        <option>Září</option>
+                        <option>Říjen</option>
+                        <option>Listopad</option>
+                        <option>Prosinec</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="make-book-button" type="button" class="btn btn-info btn-block" onclick="updateBook()">Uložit a
+                zpět</button>
+        </div>
+        <br>
+        <hr>
+
+        <div class="row">
+            <div class="col">
+                <h3 class="main-header">Záznamy: </h3>
+            </div>
+            <div class="col-2  align-self-end">
+                <button type="button" class="btn btn-outline-primary" title="Vygenerovat PDF knihy jízd pro tisk"
+                    onclick="makePDF()" style="height: 4rem; width: 8rem; font-size: x-large;">Tisk <i
+                        class="fa fa-print" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <p>Zde naleznete jednotlivé záznamy vaši knihy jízd.<br>
+            Všechny údaje v záznamech <strong>nejsou</strong> povinné a lze je zanechat prázdné.</p>
+        <hr>
+
+        <div id="total-info" class="container" style="display: none;">
+            <br>
+            <div class="row justify-content-around">
+                <div class="col-5">
+                    <h4>Stav tachometru po všech jízdách: </h4>
+                </div>
+                <div class="col-3">
+                    <h4 id="tacho-total"></h4>
+                </div>
+            </div>
+            <div class="row row justify-content-around">
+                <div class="col-5">
+                    <h4>Celková ujetá vzdálenost: </h4>
+                </div>
+                <div class="col-3">
+                    <h4 id="distance-total"></h4>
+                </div>
+            </div>
+        </div>
+
+        <div id="records-info" class="container" style="margin-top: 3rem;">
+            <h2 style="margin-top: 2rem; text-align: center; color: #4d4d4d;">Vypadá to, že ještě nemáte uložené žádné
+                záznamy...</h2>
+            <p style="margin-top: 1.5rem; text-align: center;">Přidat je můžete na stránce "<a
+                    href="add-records.html">Kalkulačka trasy</a>"</p>
+        </div>
+
+        <br>
+
+        <div id="records">
+            <div id="record1" class="container record" style="display: none; margin-bottom: 2.5rem;">
+                <div id="record-header1" class="row record-number justify-content-between">
+                    <div class="col-2">
+                        <h4 id="record-number1">#1</h4>
+                    </div>
+                    <div class="col-1" style="margin-bottom: 0.5rem;">
+                        <button class="btn btn-outline-secondary" title="Uložit změny v záznamu"
+                            onclick="updateRecord(1)"><i class="fa fa-save" style="font-size:24px;"></i></button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <label for="date1">Datum</label>
+                        <input id="date1" type="date" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="driver1">Řidič</label>
+                        <input id="driver1" type="text" class="form-control" placeholder="Řidič">
+                    </div>
+                    <div class="col">
+                        <label for="type1">Účel</label>
+                        <input id="type1" type="text" class="form-control" placeholder="Služební/soukromý">
+                    </div>
+                    <div class="col">
+                        <label for="purpose1">Důvod cesty</label>
+                        <input id="purpose1" type="text" class="form-control" placeholder="Důvod cesty">
+                    </div>
+                    <div class="col">
+                        <label for="from1">Počáteční destinace</label>
+                        <input id="from1" type="text" class="form-control" placeholder="Z">
+                    </div>
+                    <div class="col">
+                        <label for="to1">Cílová destinace</label>
+                        <input id="to1" type="text" class="form-control" placeholder="Do">
+                    </div>
+                </div>
+                <div class="row second-row" style="margin-top: 1.5rem;">
+                    <div class="col">
+                        <label for="begin-time1">Čas odjezdu</label>
+                        <input id="begin-time1" type="time" class="form-control align-middle" placeholder="Čas Odjezdu">
+                    </div>
+                    <div class="col">
+                        <label for="final-time1">Čas příjezdu</label>
+                        <input id="final-time1" type="time" class="form-control" placeholder="Čas Příjezdu">
+                    </div>
+                    <div class="col">
+                        <label for="distance1">Vzdálenost</label>
+                        <input id="distance1" type="number" class="form-control" placeholder="Kilometry">
+                    </div>
+                    <div class="col">
+                        <label for="tachometer-before1">Stav tachometru před</label>
+                        <input id="tachometer-before1" type="number" class="form-control" placeholder="Kilometry">
+                    </div>
+                    <div class="col">
+                        <label for="tachometer-after1">Stav tachometru po</label>
+                        <input id="tachometer-after1" type="number" class="form-control" placeholder="Kilometry">
+                    </div>
+                    <div class="col">
+                        <label for="gas-bought1">Objem zakoupeného paliva</label>
+                        <input id="gas-bought1" type="number" class="form-control" placeholder="Litry">
+                    </div>
+                    <div class="col">
+                        <label for="price-per-liter1">Cena jednoho litru paliva</label>
+                        <input id="price-per-liter1" type="number" class="form-control" placeholder="Kč">
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <br>
+        <footer class="page-footer font-small teal pt-4">
+            <hr>
+            <div class="container-fluid text-center text-md-left">
+                <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3">
+                        <h5 class="text-uppercase font-weight-bold">Kontakt/Hlášení chyb/Návrhy</h5>
+                        <a href="mailto: hanzelkatomas3@gmail.com">hanzelkatomas3@gmail.com</a>
+                    </div>
+                    <hr class="clearfix w-100 d-md-none pb-3">
+                    <div class="col-md-6 mb-md-0 mb-3">
+                        <h5 class="text-uppercase font-weight-bold">O projektu a jak používat</h5>
+                        <a href="how-to.html">Návod</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+    </div>
+
+    <!-- pdfmake -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.65/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.65/vfs_fonts.js"></script>
+
+    <!-- Optional JavaScript -->
+    <script src="js/shared.js"></script>
+    <script src="js/book.js"></script>
+
+    <script src='https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)'></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
