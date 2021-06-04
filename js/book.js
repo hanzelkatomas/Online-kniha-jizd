@@ -1,6 +1,6 @@
 showBook();
 generateRecords();
-
+//
 function makeBook() {
     var manufacturer = document.querySelector("#manufacturer").value;
     var model = document.querySelector("#model").value;
